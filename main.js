@@ -4,10 +4,13 @@ const navShopIcon = document.querySelector(".navbar-shopping-cart");
 const asideShopDetail = document.querySelector(".product-detail");
 const mobileMenu = document.querySelector(".menu");
 const mobileMenul = document.querySelector(".mobile-menu");
+const cardsContainer = document.querySelector('.cards-container');
+
 
 navShopIcon.addEventListener("click",toggleShopDetails);
 mobileMenu.addEventListener("click", toggleMenuMobile);
 navEmail.addEventListener( "click" , toggleMenu);
+
 
 
 function toggleMenu() {
@@ -33,4 +36,83 @@ function toggleMenuMobile() {
         asideShopDetail.classList.add('inactive');
     }
     mobileMenul.classList.toggle('inactive');
+}
+function toggleAsideDetails() {
+    const asideShopCheck = asideShopDetail.classList.contains("inactive");
+    if (!asideShopCheck) {
+        asideShopDetail.classList.add('inactive');
+    }
+    desktopMenu.classList.toggle('inactive');
+}
+
+const productList = [];
+productList.push({
+    name:'Bike',
+    precio: 120,
+    image: 'https://images.pexels.com/photos/276517/pexels-photo-276517.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+});
+productList.push({
+    name:'Relog',
+    precio: 80,
+    image: 'https://c8.alamy.com/compes/f2gpwr/reloj-de-pulsera-f2gpwr.jpg'
+});
+productList.push({
+    name:'Peine',
+    precio: 20,
+    image: 'https://media.istockphoto.com/id/147042571/es/foto/multidosificador.jpg?s=612x612&w=0&k=20&c=0-cAqbvvjzFjIUwUg6HlxjSCM-QskLD2yqsT0iXxSkA='
+});
+productList.push({
+    name:'Peine',
+    precio: 20,
+    image: 'https://media.istockphoto.com/id/147042571/es/foto/multidosificador.jpg?s=612x612&w=0&k=20&c=0-cAqbvvjzFjIUwUg6HlxjSCM-QskLD2yqsT0iXxSkA='
+});
+
+/* Imprimir productos en el main container*/
+for (product of productList) {
+    const productCard = document.createElement('div');
+    productCard.classList.add('product-card');
+
+    const productImg = document.createElement('img');
+    productImg.setAttribute('src', product.image);
+    productImg.setAttribute('id', "product-img");
+
+    const productInfo = document.createElement('div');
+    productInfo.classList.add('product-info');
+
+    const productInfoDiv = document.createElement('div');
+
+    const productPrice = document.createElement('p');
+    productPrice.innerHTML = '$' + product.precio;
+
+    const productName = document.createElement('p');
+    productName.innerHTML = product.name;
+    productInfoDiv.appendChild(productPrice);
+    productInfoDiv.appendChild(productName);
+
+    const productInfoFigure = document.createElement('figure');
+    const productImgCart = document.createElement('img');
+    productImgCart.setAttribute('src', './icons/bt_add_to_cart.svg');
+    productInfoFigure.appendChild(productImgCart);
+
+    productInfo.appendChild(productInfoDiv);
+    productInfo.appendChild(productInfoFigure);
+
+    productCard.appendChild(productImg);
+    productCard.appendChild(productInfo)
+
+    cardsContainer.appendChild(productCard);
+
+
+}
+/* Abrir y Cerrar los detalles del producto*/
+const imgProduct= document.querySelector("#product-img");
+const asideProductDetails = document.querySelector(".product-detail-aside")
+
+imgProduct.addEventListener("click", toggleAsideDetails);
+function toggleAsideDetails() {
+    const asideShopCheck = asideShopDetail.classList.contains("inactive");
+    if (!asideShopCheck) {
+        asideShopDetail.classList.add('inactive');
+    }
+    asideProductDetails.classList.toggle('inactive');
 }
